@@ -1,1 +1,2 @@
 gem 'pqueue'
+gem 'rspec'
