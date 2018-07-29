@@ -24,6 +24,12 @@ describe 'Company' do
     expect(emails).to eq(["cto@company.com"])
   end
 
+  it 'extracts list of employee emails with highest position from list of three employees' do
+    employees = [cto, junior, middle]
+    emails = @company.emails_by_highest_position(employees, 2)
+    expect(emails).to contain_exactly("middle@company.com", "cto@company.com")
+  end
+
   private
 
     def junior
