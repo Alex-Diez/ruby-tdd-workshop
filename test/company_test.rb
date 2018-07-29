@@ -30,6 +30,12 @@ describe 'Company' do
     expect(emails).to contain_exactly("middle@company.com", "cto@company.com")
   end
 
+  it 'extracts list of employees emails with highest position from employees list with position duplications' do
+    employees = [senior, senior, senior, team_leader, architect, cto]
+    emails = @company.emails_by_highest_position(employees, 2)
+    expect(emails).to contain_exactly("architect@company.com", "cto@company.com")
+  end
+
   private
 
     def junior
@@ -38,6 +44,18 @@ describe 'Company' do
 
     def middle
       Employee.new(Position::MIDDLE, "middle@company.com")
+    end
+
+    def senior
+      Employee.new(Position::SENIOR, "senior@company.com")
+    end
+
+    def team_leader
+      Employee.new(Position::TEAM_LEADER, "team_leader@company.com")
+    end
+
+    def architect
+      Employee.new(Position::ARCHITECT, "architect@company.com")
     end
 
     def cto

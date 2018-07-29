@@ -1,30 +1,20 @@
+require 'pqueue'
+
 class Company
   def emails_by_highest_position(employees, limit)
-    if limit == 1
-      employee = employees[0]
-      i = 1
-      while employees.size > i
-        if employees[i].position > employee.position
-          employee = employees[i]
-        end
-        i += 1
+    employee_list = PQueue.new
+    limit.times { |j| employee_list.push employees[j] }
+    i = 1
+    while employees.size > i
+      employee = employee_list.pop
+      if employees[i].position > employee.position
+        employee_list.push employees[i]
+      else
+        employee_list.push employee
       end
-      [employee.email]
-    else
-      employee_list = []
-      employee_list[0] = employees[0]
-      employee_list[1] = employees[1]
-      i = 1
-      while employees.size > i
-        if employees[i].position > employee_list[0].position
-          employee_list[0] = employees[i]
-        elsif employees[i].position > employee_list[1].position
-          employee_list[1] = employees[i]
-        end
-        i += 1
-      end
-      employee_list.map { |emp| emp.email }
+      i += 1
     end
+    employee_list.to_a.map { |emp| emp.email }
   end
 end
 
@@ -40,5 +30,8 @@ end
 module Position
   JUNIOR = 1
   MIDDLE = 2
+  SENIOR = 3
+  TEAM_LEADER = 4
+  ARCHITECT = 5
   CTO = 100
 end
