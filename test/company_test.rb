@@ -39,26 +39,26 @@ describe 'Company' do
   private
 
     def junior
-      Employee.new(Position::JUNIOR, "junior@company.com")
+      Employee.new(Position.junior, "junior@company.com")
     end
 
     def middle
-      Employee.new(Position::MIDDLE, "middle@company.com")
+      Employee.new(Position.middle, "middle@company.com")
     end
 
     def senior
-      Employee.new(Position::SENIOR, "senior@company.com")
+      Employee.new(Position.senior, "senior@company.com")
     end
 
     def team_leader
-      Employee.new(Position::TEAM_LEADER, "team_leader@company.com")
+      Employee.new(Position.team_leader, "team_leader@company.com")
     end
 
     def architect
-      Employee.new(Position::ARCHITECT, "architect@company.com")
+      Employee.new(Position.architect, "architect@company.com")
     end
 
     def cto
-      Employee.new(Position::CTO, "cto@company.com")
+      Employee.new(Position.cto, "cto@company.com")
     end
 end

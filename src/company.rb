@@ -31,11 +31,42 @@ class Employee
   end
 end
 
-module Position
-  JUNIOR = 1
-  MIDDLE = 2
-  SENIOR = 3
-  TEAM_LEADER = 4
-  ARCHITECT = 5
-  CTO = 100
+class Position
+  attr_reader :val
+
+  private
+
+    def self.new(val)
+      @val = val
+    end
+
+  public
+
+    def self.junior
+      self.new(1)
+    end
+
+    def self.middle
+      self.new(2)
+    end
+
+    def self.senior
+      self.new(3)
+    end
+
+    def self.team_leader
+      self.new(4)
+    end
+
+    def self.architect
+      self.new(5)
+    end
+
+    def self.cto
+      self.new(100)
+    end
+
+    def <=>(other)
+      val <=> other.val
+    end
 end
