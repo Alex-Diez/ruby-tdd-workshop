@@ -2,19 +2,19 @@ require 'pqueue'
 
 class Company
   def emails_by_highest_position(employees, limit)
-    employee_list = PQueue.new
-    limit.times { |j| employee_list.push employees[j] }
-    i = 1
+    queue = PQueue.new(&Employee.by_position_asc)
+    limit.times { |j| queue.push employees[j] }
+    i = limit
     while employees.size > i
-      employee = employee_list.pop
+      employee = queue.pop
       if employees[i].position > employee.position
-        employee_list.push employees[i]
+        queue.push employees[i]
       else
-        employee_list.push employee
+        queue.push employee
       end
       i += 1
     end
-    employee_list.to_a.map { |emp| emp.email }
+    queue.to_a.map { |emp| emp.email }
   end
 end
 
@@ -24,6 +24,10 @@ class Employee
   def initialize(position, email)
     @email = email
     @position = position
+  end
+
+  def self.by_position_asc
+    lambda { |emp1, emp2| emp2.position <=> emp1.position }
   end
 end
 
